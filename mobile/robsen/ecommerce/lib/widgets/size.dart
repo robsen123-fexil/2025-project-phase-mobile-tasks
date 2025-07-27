@@ -1,6 +1,7 @@
+
 import 'package:flutter/material.dart';
 
-Widget Sizes(String size , bool isSelected) {
+Widget Sizes(String size , bool touched) {
   return TextButton(
     onPressed: () {},
     child: Container(
@@ -8,13 +9,12 @@ Widget Sizes(String size , bool isSelected) {
       width: 50,
 
       decoration: BoxDecoration(
-        color: isSelected? const Color.fromARGB(255, 0, 86, 235) : Colors.white,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.grey, width: 1),
       ),
       child: Center(
         child: Text(
-          size,
+          '31',
           style: TextStyle(
             color: const Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.w900,

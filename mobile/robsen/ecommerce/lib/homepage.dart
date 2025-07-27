@@ -1,5 +1,6 @@
 import 'package:ecommerce/widgets/product.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -104,50 +105,66 @@ SizedBox(height: 20,),
                       )
                       
                     ),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.search , color: const Color.fromARGB(255, 204, 201, 201),))
+                    child: IconButton(onPressed: ()=>context.go('/search'), icon: Icon(Icons.search , color: const Color.fromARGB(255, 204, 201, 201),))
                    )
                 ],
               ),
               SizedBox(height: 30,) , 
-              productcard(
-                Image(image: AssetImage('assets/show.webp') , 
-                
+              GestureDetector(
+                onTap: () => context.go('/details'),
+                child: productcard(
+                  Image(image: AssetImage('assets/show.webp') , 
+                  
+                  ),
+                  'Derby Shoes' , 
+                  'mens shoes'  ,
+                  120, 
+                  4
+                        
                 ),
-                'Derby Shoes' , 
-                'mens shoes'  ,
-                120, 
-                4
-        
               ),
-              SizedBox(height: 10,),productcard(
-                Image(image: AssetImage('assets/show.webp') , 
-                
+              SizedBox(height: 10,),
+              
+              GestureDetector(
+                onTap: () => context.go('/details'),
+                child: productcard(
+                  Image(image: AssetImage('assets/show.webp') , 
+                  
+                  ),
+                  'Derby Cotton' , 
+                  'mens shoes'  ,
+                  100 , 
+                  4
+                        
                 ),
-                'Derby Cotton' , 
-                'mens shoes'  ,
-                100 , 
-                4
-        
               ),
-              SizedBox(height: 5,),productcard(
-                Image(image: AssetImage('assets/show.webp') , 
-                
+              SizedBox(height: 5,),
+              GestureDetector(
+                onTap: () => context.go('/details'),
+                child: productcard(
+                  Image(image: AssetImage('assets/show.webp') , 
+                  
+                  ),
+                  'derby' , 
+                  'mens shoes'  ,
+                  100 , 
+                  4
+                        
                 ),
-                'derby' , 
-                'mens shoes'  ,
-                100 , 
-                4
-        
               ),
-              SizedBox(height: 5,),productcard(
-                Image(image: AssetImage('assets/show.webp') , 
-                
+              SizedBox(height: 5,),
+              GestureDetector(
+                onTap: ()=>context.go('/details'),
+                child: productcard(
+                  Image(image: AssetImage('assets/show.webp') , 
+                  
+                  ),
+                  'derby' , 
+                  'mens show'  ,
+                  100 , 
+                  4
+                        
                 ),
-                'derby' , 
-                'mens show'  ,
-                100 , 
-                4
-        
               ),
               SizedBox(height: 5,)
               

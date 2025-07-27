@@ -33,7 +33,7 @@ Widget productcard(
                   children: [Text(name , style: TextStyle(fontWeight: FontWeight.w800 , fontSize: 16)), SizedBox(height: 3), Text(type , style: TextStyle(color: const Color.fromARGB(255, 129, 128, 128)),)]),
                 Column(
                   children: [
-                    Text('\$$price' ,
+                    Text('\$'+price.toString() ,
                       style: TextStyle(fontWeight: FontWeight.w800),
                     ),
                     SizedBox(height: 3),
