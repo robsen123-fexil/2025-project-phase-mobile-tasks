@@ -1,4 +1,6 @@
 
+import 'package:dartz/dartz.dart';
+import 'package:ecommerce_app/core/error/failures.dart';
 import 'package:ecommerce_app/domain/entities/product.dart';
 import 'package:ecommerce_app/domain/repositories/product_repositories.dart';
 
@@ -7,7 +9,7 @@ class UpdateProductUsecase {
 
   UpdateProductUsecase(this.repository);
 
-  void call(Product product) {
-    repository.updateProduct(product);
+  Future<Either<Failure , Product>> call(Product product) async{
+    return await repository.updateProduct(product);
   }
 }

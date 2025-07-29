@@ -103,7 +103,7 @@ SizedBox(height: 20,),
                         color: const Color.fromARGB(255, 206, 204, 204),
                         width: 1
                       )
-                      
+
                     ),
                     child: IconButton(onPressed: ()=>context.go('/search'), icon: Icon(Icons.search , color: const Color.fromARGB(255, 204, 201, 201),))
                    )
@@ -111,7 +111,7 @@ SizedBox(height: 20,),
               ),
               SizedBox(height: 30,) , 
               GestureDetector(
-                onTap: () => context.go('/details'),
+                onTap: () => context.go('/detail'),
                 child: productcard(
                   Image(image: AssetImage('assets/show.webp') , 
                   
@@ -126,7 +126,7 @@ SizedBox(height: 20,),
               SizedBox(height: 10,),
               
               GestureDetector(
-                onTap: () => context.go('/details'),
+                onTap: () => context.go('/detail'),
                 child: productcard(
                   Image(image: AssetImage('assets/show.webp') , 
                   
@@ -140,7 +140,7 @@ SizedBox(height: 20,),
               ),
               SizedBox(height: 5,),
               GestureDetector(
-                onTap: () => context.go('/details'),
+                onTap: () => context.go('/detail'),
                 child: productcard(
                   Image(image: AssetImage('assets/show.webp') , 
                   
@@ -154,7 +154,7 @@ SizedBox(height: 20,),
               ),
               SizedBox(height: 5,),
               GestureDetector(
-                onTap: ()=>context.go('/details'),
+                onTap: ()=>context.go('/detail'),
                 child: productcard(
                   Image(image: AssetImage('assets/show.webp') , 
                   

@@ -2,6 +2,7 @@ import 'package:ecommerce/widgets/product.dart';
 import 'package:ecommerce/widgets/text_field.dart';
 import 'package:ecommerce/widgets/textbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -18,7 +19,7 @@ class _SearchPageState extends State<SearchPage> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-       barrierColor: Colors.transparent,
+      barrierColor: Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
       ),
@@ -62,74 +63,88 @@ class _SearchPageState extends State<SearchPage> {
         leading: Padding(
           padding: const EdgeInsets.all(14.0),
           child: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.arrow_back_ios , color: Colors.blue,),
+            onPressed: () => context.go('/'),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.blue),
           ),
         ),
-        title: Text('Search Product' , style: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold),),
+        title: Text(
+          'Search Product',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
-        
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Container(
-            height: 48,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Leather',
-                    style: TextStyle(color: Colors.black54),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 48,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Leather',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                          Icon(
+                            Icons.arrow_right_alt_outlined,
+                            color: Colors.blue,
+                            size: 25,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  Icon(Icons.arrow_right_alt_outlined , color:Colors.blue ,size:25)
-                  
-                ],
+                ),
+                SizedBox(width: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: IconButton(
+                    onPressed: _showFilterSheet,
+                    icon: Icon(
+                      Icons.filter_list_rounded,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      size: 25,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            GestureDetector(
+              onTap: () => context.go('/detail'),
+              child: productcard(
+                Image(image: AssetImage('assets/show.webp')),
+                'Derby Cotton shoes',
+                'Men\'s Shoe',
+                100,
+                4.0,
               ),
             ),
-          ),
-        ),
-        SizedBox(width: 8),
-        GestureDetector(
-          onTap: (){},
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: IconButton(onPressed:_showFilterSheet, icon: Icon(Icons.filter_list_rounded , color:const Color.fromARGB(255, 255, 255, 255) , size:25))),
-        )
-        
-       
-      ],
-    ),
-            SizedBox(height: 10),
-            productcard(
-              Image(image: AssetImage('assets/show.webp')),
-              'Derby Cotton shoes',
-              'Men\'s Shoe',
-              100,
-              4.0,
-            ),
             SizedBox(height: 5),
-            productcard(
-              Image(image: AssetImage('assets/show.webp')),
-              'Derby',
-              'Men\'s Shoe',
-              100,
-              4,
+            GestureDetector(
+              onTap: () => context.go('/detail'),
+              child: productcard(
+                Image(image: AssetImage('assets/show.webp')),
+                'Derby',
+                'Men\'s Shoe',
+                100,
+                4,
+              ),
             ),
           ],
         ),
@@ -150,8 +165,8 @@ Widget filter({
     mainAxisSize: MainAxisSize.min,
     children: [
       Text('Category'),
-      SizedBox(height:8) ,
-      Text_field(true , false),
+      SizedBox(height: 8),
+      Text_field(true, false),
       SizedBox(height: 16),
       Text('Price'),
       RangeSlider(
@@ -167,7 +182,7 @@ Widget filter({
         onChanged: onRangeChanged,
       ),
       SizedBox(height: 16),
-      textbutton('Apply', Colors.blue, Colors.white, Colors.blue)
+      textbutton('Apply', Colors.blue, Colors.white, Colors.blue),
     ],
   );
 }

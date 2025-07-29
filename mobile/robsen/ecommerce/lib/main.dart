@@ -7,8 +7,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(routerConfig: router);
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: router);
   }
 }

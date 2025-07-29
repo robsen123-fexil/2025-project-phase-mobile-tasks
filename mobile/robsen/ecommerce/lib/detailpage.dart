@@ -3,6 +3,7 @@
 import 'package:ecommerce/widgets/button.dart' show Button;
 import 'package:ecommerce/widgets/size.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Detailpage extends StatelessWidget {
   const Detailpage({super.key});
@@ -32,7 +33,7 @@ class Detailpage extends StatelessWidget {
                   child: Center(
                     child: IconButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        context.go('/');
                       },
                       icon: Icon(Icons.arrow_back_ios , color: const Color.fromARGB(255, 67, 16, 255),size: 15,),
                     ),

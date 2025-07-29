@@ -13,4 +13,4 @@ class NoParams {
 
   @override
   int get hashCode => 0;
-}
+} 
