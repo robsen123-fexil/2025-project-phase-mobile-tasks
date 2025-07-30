@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/features/data/models/product_models.dart';
+
+import 'package:ecommerce_app/features/product/data/models/product_models.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:flutter_test/flutter_test.dart';
 
