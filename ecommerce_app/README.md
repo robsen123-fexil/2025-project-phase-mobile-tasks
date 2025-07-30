@@ -1,16 +1,40 @@
-# ecommerce_app
+# Ecommerce Flutter App
 
-A new Flutter project.
+This app follows **Clean Architecture** to keep code organized, testable, and scalable.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Task 10: Data Overview Layer
 
-A few resources to get you started if this is your first Flutter project:
+### ✅ Folder Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Organized under `lib/`:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+lib/
+├── core/ # Shared logic (e.g. error handling)
+├── features/
+│ └── product/ # Product feature module
+│ └── data/
+│ └── models/
+│ └── product_model.dart
+test/ # Unit and widget tests
+
+### ✅ Product Model
+
+- Created `ProductModel` with `fromJson` and `toJson`.
+- Mirrors `Product` entity structure.
+- Added unit tests to verify conversion and behavior.
+
+### ✅ Documentation
+
+- This README explains the structure and purpose of the data layer.
+- Highlights how Clean Architecture is applied.
+
+---
+
+## 🧪 Testing
+
+Run:
+
+```bash
+flutter test
