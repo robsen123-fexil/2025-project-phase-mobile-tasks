@@ -1,7 +1,7 @@
 import 'dart:core';
 
 import 'package:ecommerce_app/core/error/failures.dart';
-import 'package:ecommerce_app/domain/entities/product.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ProductRepository {
