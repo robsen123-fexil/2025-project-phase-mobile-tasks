@@ -45,6 +45,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   equatable: ^2.0.7
+  mockito: ^5.5.0
+  build_runner: ^2.6.0
+  http: ^1.4.0
 
 dev_dependencies:
   flutter_test:
