@@ -14,3 +14,10 @@ class NoParams {
   @override
   int get hashCode => 0;
 } 
+
+class DeleteProductParams {
+  final String productId;
+
+  DeleteProductParams({required this.productId});
+}
+

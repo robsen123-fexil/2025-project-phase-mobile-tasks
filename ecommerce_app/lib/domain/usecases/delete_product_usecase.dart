@@ -2,18 +2,19 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/failures.dart';
-import 'package:ecommerce_app/core/usecases/usercase.dart';
-import 'package:ecommerce_app/domain/entities/product.dart';
+import 'package:ecommerce_app/core/usecases/usecase.dart';
 import 'package:ecommerce_app/domain/repositories/product_repositories.dart';
 
-class DeleteProductUsecase implements UseCase<Product, Product> {
-  final ProductRepositories repository;
 
-  DeleteProductUsecase(this.repository);
+class DeleteProductUseCase implements UseCase<Unit, DeleteProductParams> {
+  final ProductRepository repository;
+
+  DeleteProductUseCase(this.repository);
 
   @override
-  Future<Either<Failure, Product>> call(Product product) async {
-    final result = await repository.deleteProduct(product.id  );
-    return result.fold((failure) => Left(failure), (_) => Right(product));
+  Future<Either<Failure, Unit>> call(DeleteProductParams params) async {
+    final result = await repository.deleteProduct(params.productId);
+    return result.fold((failure) => Left(failure), (product) => Right(unit));
   }
 }
+

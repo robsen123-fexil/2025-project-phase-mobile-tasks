@@ -5,7 +5,7 @@ import 'package:ecommerce_app/domain/entities/product.dart';
 import 'package:ecommerce_app/domain/repositories/product_repositories.dart';
 
 class UpdateProductUsecase {
-  final ProductRepositories repository;
+  final ProductRepository repository;
 
   UpdateProductUsecase(this.repository);
 
