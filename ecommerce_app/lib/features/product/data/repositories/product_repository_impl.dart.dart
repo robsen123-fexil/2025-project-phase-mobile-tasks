@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/exceptions.dart';
 import 'package:ecommerce_app/core/error/failures.dart';
-import 'package:ecommerce_app/core/platform/network_info.dart';
+import 'package:ecommerce_app/core/network/network_info.dart';
 import 'package:ecommerce_app/features/product/data/datasources/product_local_data_source.dart';
 import 'package:ecommerce_app/features/product/data/datasources/remote_data_source.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
@@ -30,6 +30,7 @@ class ProductRepositoryImpl implements ProductRepository{
     } else {
       return const Left(NetworkFailure('network error'));
     }
+
   }
   
   @override
@@ -52,6 +53,8 @@ class ProductRepositoryImpl implements ProductRepository{
   
   @override
   Future<Either<Failure, List<Product>>> getAllProducts() async{
+
+      
       if (await networkInfo.isConnected) {
       try {
         final remoteProducts = await productRemoteDatasource.getAllProducts();
