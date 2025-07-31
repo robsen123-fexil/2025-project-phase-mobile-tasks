@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/failures.dart';
 import 'package:ecommerce_app/core/usecases/usecase.dart';
-import 'package:ecommerce_app/domain/entities/product.dart';
-import 'package:ecommerce_app/domain/repositories/product_repositories.dart';
-import 'package:ecommerce_app/domain/usecases/view_all_products_use_case.dart';
+import 'package:ecommerce_app/features/product/domain/repositories/product_repositories.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/view_all_products_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -21,7 +21,7 @@ void main() {
 
   setUp(() {
     mockProductRepositories = MockProductRepository();
-    usecase = ViewAllProductsUsecase(mockProductRepositories);
+    usecase = ViewAllProductsUsecase(mockProductRepositories as ProductRepository);
 
     testProducts = [
       Product(

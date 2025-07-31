@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/failures.dart';
-import 'package:ecommerce_app/domain/entities/product.dart';
-import 'package:ecommerce_app/domain/repositories/product_repositories.dart';
-import 'package:ecommerce_app/domain/usecases/view_product_usecase.dart';
+import 'package:ecommerce_app/features/product/domain/repositories/product_repositories.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/view_product_usecase.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -26,7 +26,7 @@ void main() {
 
   setUp(() {
     mockRepository = MockProductRepository();
-    usecase = ViewProductUsecase(mockRepository);
+    usecase = ViewProductUsecase(mockRepository as ProductRepository);
   });
 
   test('should return product when found by ID', () async {

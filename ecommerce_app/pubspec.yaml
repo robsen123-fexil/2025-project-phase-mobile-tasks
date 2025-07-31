@@ -17,18 +17,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
-linter:
-  rules:
-    avoid_print:true
-    prefer_const_contstructors:true
-    prefer_const_literals_to_create_immutables:true
-    avoid_unnecessary_containers:true
-    always_declare_return_types:true"
-    prefer_single_qoutes:true
-    directives_ordering:true
-    prefer_relative_imports:true
 environment:
-  sdk: ^3.7.0
+  sdk: ">=3.7.0-0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -45,13 +35,13 @@ dependencies:
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   equatable: ^2.0.7
-  build_runner: ^2.6.0
-  mockito: ^5.5.0
   http: ^1.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.4.15
+  mockito: 5.4.4
 
 
 

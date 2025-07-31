@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/failures.dart' show ServerFailure;
-import 'package:ecommerce_app/domain/entities/product.dart';
-import 'package:ecommerce_app/domain/repositories/product_repositories.dart';
-import 'package:ecommerce_app/domain/usecases/update_product_usecase.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product.dart';
+import 'package:ecommerce_app/features/product/domain/repositories/product_repositories.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/update_product_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -24,7 +24,7 @@ void main() {
 
   setUp(() {
     mockRepository = MockProductRepository();
-    usecase = UpdateProductUsecase(mockRepository);
+    usecase = UpdateProductUsecase(mockRepository as ProductRepository);
   });
 
   test('should update product successfully via repository', () async {

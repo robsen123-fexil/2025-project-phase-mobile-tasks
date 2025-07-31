@@ -1,10 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_app/core/error/failures.dart';
 import 'package:ecommerce_app/core/usecases/usecase.dart';
-import 'package:ecommerce_app/domain/entities/product.dart';
-import 'package:ecommerce_app/domain/usecases/delete_product_usecase.dart';
-import 'package:ecommerce_app/domain/usecases/view_product_usecase.dart';
-import 'package:ecommerce_app/domain/repositories/product_repositories.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/delete_product_usecase.dart';
+import 'package:ecommerce_app/features/product/domain/repositories/product_repositories.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -18,7 +15,7 @@ void main() {
 
   setUp(() {
     mockProductRepository = MockProductRepository();
-    deleteProductUsecase = DeleteProductUseCase(mockProductRepository);
+    deleteProductUsecase = DeleteProductUseCase(mockProductRepository as ProductRepository);
   });
 
   const String productId = 'test_product_id';
