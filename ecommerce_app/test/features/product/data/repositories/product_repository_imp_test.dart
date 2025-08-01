@@ -80,7 +80,7 @@ void main() {
     });
 
     test('should return single product from cache when offline', () async {
-      when(mockLocalDatasource.getProductByID('1')).thenAnswer(
+      when(mockLocalDatasource.getcatchedProductByID('1')).thenAnswer(
         (_) async => tProductModels[0],
       ); // keep for backward compatibility
       when(

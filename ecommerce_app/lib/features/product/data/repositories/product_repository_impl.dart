@@ -1,16 +1,11 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/exceptions.dart';
 import 'package:ecommerce_app/core/error/failures.dart';
 import 'package:ecommerce_app/core/network/network_info.dart';
 import 'package:ecommerce_app/features/product/data/datasources/local_data_source.dart';
-import 'package:ecommerce_app/features/product/data/datasources/product_local_data_source.dart';
 import 'package:ecommerce_app/features/product/data/datasources/remote_data_source.dart';
-import 'package:ecommerce_app/features/product/data/models/product_models.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:ecommerce_app/features/product/domain/repositories/product_repositories.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductLocalDataSource productLocalDatasource;
@@ -79,14 +74,14 @@ class ProductRepositoryImpl implements ProductRepository {
     if (await networkInfo.isConnected) {
       try {
         final product = await productRemoteDatasource.getProductById(id);
-        await productLocalDatasource.getProductByID(id);
+        await productLocalDatasource.getcatchedProductByID(id);
         return Right(product);
       } on ServerExceptions {
         return const Left(ServerFailure('server error'));
       }
     } else {
       try {
-        final product = await productLocalDatasource.getProductByID(id);
+        final product = await productLocalDatasource.getcatchedProductByID(id);
         return Right(product);
       } on CacheExceptions {
         return const Left(CacheFailure('No cached products available'));
@@ -118,5 +113,3 @@ class ProductRepositoryImpl implements ProductRepository {
     }
   }
 }
-
-

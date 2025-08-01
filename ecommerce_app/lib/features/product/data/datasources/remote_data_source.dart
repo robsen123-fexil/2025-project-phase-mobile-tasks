@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 
-import 'package:ecommerce_app/features/product/data/models/product_models.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 
 abstract class ProductRemoteDataSource {

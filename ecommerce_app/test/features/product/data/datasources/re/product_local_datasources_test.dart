@@ -57,7 +57,7 @@ void main() {
     ).called(1);
   });
 
-  test('should return list of products from local cache', () async {
+  test('should return single product by ID from local cache', () async {
     // Arrange
     final cachedJson = json.encode(
       testProducts.map((e) => e.tojson()).toList(),
@@ -71,6 +71,8 @@ void main() {
     final result = await dataSource.getcatchedProductByID('1');
 
     // Assert
-    expect(result, equals(testProducts));
+    verify(mockSharedPreferences.getString('CACHED_PRODUCTS'));
+    expect(result, isA<ProductModel>());
+    expect(result.id, equals('1'));
   });
 }
