@@ -6,12 +6,13 @@
 import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:ecommerce_app/core/network/network_info.dart' as _i7;
-// import 'package:ecommerce_app/core/platform/network_info.dart' as _i7;
+import 'package:ecommerce_app/core/network/network_info.dart' as _i8;
 import 'package:ecommerce_app/features/product/data/datasources/local_data_source.dart'
     as _i6;
 import 'package:ecommerce_app/features/product/data/datasources/remote_data_source.dart'
     as _i4;
+import 'package:ecommerce_app/features/product/data/models/product_models.dart'
+    as _i7;
 import 'package:ecommerce_app/features/product/domain/entities/product.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -196,19 +197,14 @@ class MockProductLocalDataSource extends _i1.Mock
       ) as _i5.Future<_i2.Product>);
 
   @override
-  _i5.Future<_i3.Unit> deleteProduct(String? id) => (super.noSuchMethod(
+  _i5.Future<void> deleteProduct(String? id) => (super.noSuchMethod(
         Invocation.method(
           #deleteProduct,
           [id],
         ),
-        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
-          this,
-          Invocation.method(
-            #deleteProduct,
-            [id],
-          ),
-        )),
-      ) as _i5.Future<_i3.Unit>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   _i5.Future<List<_i2.Product>> getcatchedProducts(String? id) =>
@@ -237,7 +233,8 @@ class MockProductLocalDataSource extends _i1.Mock
       ) as _i5.Future<_i2.Product>);
 
   @override
-  _i5.Future<void> addcacheProduct(_i2.Product? product) => (super.noSuchMethod(
+  _i5.Future<void> addcacheProduct(_i7.ProductModel? product) =>
+      (super.noSuchMethod(
         Invocation.method(
           #addcacheProduct,
           [product],
@@ -256,12 +253,23 @@ class MockProductLocalDataSource extends _i1.Mock
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> addcacheProducts(List<_i7.ProductModel>? products) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addcacheProducts,
+          [products],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
 
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i7.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i8.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }

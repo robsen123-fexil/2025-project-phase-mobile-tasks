@@ -5,9 +5,10 @@ import 'package:ecommerce_app/features/product/data/datasources/remote_data_sour
 import 'package:ecommerce_app/features/product/domain/repositories/product_repositories.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @GenerateMocks(
-  [ProductRepository ,ProductRemoteDataSource, ProductLocalDataSource, NetworkInfo],
+  [ProductRepository ,ProductRemoteDataSource, ProductLocalDataSource, NetworkInfo , SharedPreferences],
   customMocks: [MockSpec<http.Client>(as: #MockHttpClient)],
 )
 void main() {}

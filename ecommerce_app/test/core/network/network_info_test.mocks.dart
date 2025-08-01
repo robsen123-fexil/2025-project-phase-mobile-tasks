@@ -5,7 +5,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-
 import 'package:ecommerce_app/core/network/network_info.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 

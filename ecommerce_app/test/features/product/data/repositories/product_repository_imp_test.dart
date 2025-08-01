@@ -6,7 +6,7 @@ import 'package:ecommerce_app/core/network/network_info.dart';
 import 'package:ecommerce_app/features/product/data/datasources/local_data_source.dart';
 import 'package:ecommerce_app/features/product/data/datasources/remote_data_source.dart';
 
-import 'package:ecommerce_app/features/product/data/repositories/product_repository_impl.dart.dart';
+import 'package:ecommerce_app/features/product/data/repositories/product_repository_impl.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
