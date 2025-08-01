@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/exceptions.dart';
 import 'package:ecommerce_app/core/error/failures.dart';
 import 'package:ecommerce_app/core/platform/network_info.dart';
+import 'package:ecommerce_app/features/product/data/datasources/local_data_source.dart';
 import 'package:ecommerce_app/features/product/data/datasources/product_local_data_source.dart';
 import 'package:ecommerce_app/features/product/data/datasources/remote_data_source.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
@@ -9,8 +10,8 @@ import 'package:ecommerce_app/features/product/domain/repositories/product_repos
 
 class ProductRepositoryImpl implements ProductRepository{
    final ProductLocalDataSource productLocalDatasource;
-  final ProductRemoteDataSource productRemoteDatasource;
-  final NetworkInfo networkInfo;
+    final ProductRemoteDataSource productRemoteDatasource;
+   final NetworkInfo networkInfo;
 
   ProductRepositoryImpl({
     required this.productLocalDatasource,
