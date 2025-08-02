@@ -5,7 +5,7 @@ import 'package:ecommerce_app/features/product/data/models/product_models.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../../helpers/test_helpers.mocks.dart';
+import '../../../../helpers/test_helpers.mocks.dart';
 
 void main() {
   late ProductLocalDatasourceImpl dataSource;

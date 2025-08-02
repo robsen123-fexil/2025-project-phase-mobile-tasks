@@ -18,13 +18,20 @@ abstract class ProductRemoteDataSource {
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   final http.Client client;
   final String url;
-  ProductRemoteDataSourceImpl(this.client, this.url);
+  ProductRemoteDataSourceImpl({
+    required this.client,
+    this.url = 'https://g5-flutter-learning-path-be.onrender.com/',
+  });
   @override
   Future<List<Product>> getAllProducts() async {
     final response = await client.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body);
-      return data.map((json) => ProductModel.fromJson(json)).toList();
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['data'] != null) {
+        final List<dynamic> productsData = responseData['data'];
+        return productsData.map((json) => ProductModel.fromJson(json)).toList();
+      }
+      throw ServerExceptions();
     } else {
       throw ServerExceptions();
     }
@@ -34,8 +41,11 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   Future<Product> getProductById(String id) async {
     final response = await client.get(Uri.parse('$url/$id'));
     if (response.statusCode == 200) {
-      final jsondata = json.decode(response.body);
-      return ProductModel.fromJson(jsondata);
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['data'] != null) {
+        return ProductModel.fromJson(responseData['data']);
+      }
+      throw ServerExceptions();
     } else {
       throw ServerExceptions();
     }
@@ -48,9 +58,13 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       headers: {'Content-Type': 'application/json'},
       body: json.encode((product as ProductModel).tojson()),
     );
+
     if (response.statusCode == 201) {
-      final jsondata = json.decode(response.body);
-      return ProductModel.fromJson(jsondata);
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['data'] != null) {
+        return ProductModel.fromJson(responseData['data']);
+      }
+      throw ServerExceptions();
     } else {
       throw ServerExceptions();
     }
@@ -58,10 +72,18 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<Product> updateProduct(Product product) async {
-    final response = await client.put(Uri.parse('$url/${product.id}'), body: json.encode((product as ProductModel).tojson()));
+    final response = await client.put(
+      Uri.parse('$url/${product.id}'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode((product as ProductModel).tojson()),
+    );
+
     if (response.statusCode == 200) {
-      final jsondata = json.decode(response.body);
-      return ProductModel.fromJson(jsondata);
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['data'] != null) {
+        return ProductModel.fromJson(responseData['data']);
+      }
+      throw ServerExceptions();
     } else {
       throw ServerExceptions();
     }
@@ -69,8 +91,12 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<Unit> deleteProduct(String id) async {
-    final response = await client.delete(Uri.parse('$url/$id'));
-    if (response.statusCode == 204) {
+    final response = await client.delete(
+      Uri.parse('$url/$id'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 204 || response.statusCode == 200) {
       return unit;
     } else {
       throw ServerExceptions();
