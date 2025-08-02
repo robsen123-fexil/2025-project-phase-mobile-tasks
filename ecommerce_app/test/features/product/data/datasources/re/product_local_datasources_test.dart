@@ -12,8 +12,7 @@ void main() {
   late MockSharedPreferences mockSharedPreferences;
   late List<ProductModel> testProducts;
 
-  // const CACHED_PRODUCTS`` = 'CACHED_PRODUCTS';
-
+  
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
