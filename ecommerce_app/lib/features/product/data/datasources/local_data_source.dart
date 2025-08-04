@@ -80,7 +80,7 @@ class ProductLocalDatasourceImpl implements ProductLocalDataSource {
       (_) => <ProductModel>[],
     );
     await addcacheProducts([
-      ...current.map((p) => p as ProductModel).toList(),
+      ...current.map((p) => p as ProductModel),
       products,
     ]);
   }

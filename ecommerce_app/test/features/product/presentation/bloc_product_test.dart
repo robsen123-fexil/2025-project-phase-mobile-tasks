@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_app/core/error/failures.dart';
 import 'package:ecommerce_app/core/usecases/usecase.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:ecommerce_app/features/product/domain/usecases/create_product_usecase.dart';
@@ -30,6 +31,8 @@ void main() {
   late ViewAllProductsUsecase viewAllProductsUsecase;
   late ViewProductUsecase viewProductUsecase;
   late ProductBloc bloc;
+  late Product tProduct;
+  late List<Product> tProducts;
 
   setUp(() {
     updateProductUsecase = MockUpdateProductUsecase();
@@ -45,14 +48,18 @@ void main() {
       getAllProductsUseCase: viewAllProductsUsecase,
       viewProductUsecase: viewProductUsecase,
     );
-    final tProduct = Product(
+
+    tProduct = Product(
       id: '1',
       name: 'Test Product',
       description: 'Test Description',
       price: 100,
-       imageUrl: 'https/image.com',
+      imageUrl: 'https/image.com',
     );
-    final tProducts = [tProduct];
+    tProducts = [tProduct];
+  });
+
+  group('ProductBloc', () {
     blocTest<ProductBloc, ProductState>(
       'emits [LoadingState, LoadedAllProduct] when LoadAllProductEvent is added',
       build: () {
@@ -64,7 +71,8 @@ void main() {
       act: (bloc) => bloc.add(LoadAllProductEvent()),
       expect: () => [LoadingState(), LoadedAllProduct(tProducts)],
     );
-  blocTest<ProductBloc, ProductState>(
+
+    blocTest<ProductBloc, ProductState>(
       'emits [LoadingState, LoadedSingleProductState] when GetSingleProductEvent is added',
       build: () {
         when(
@@ -75,12 +83,13 @@ void main() {
       act: (bloc) => bloc.add(GetSingleProductEvent('1')),
       expect: () => [LoadingState(), LoadedSingleProductState(tProduct)],
     );
+
     blocTest<ProductBloc, ProductState>(
       'emits [LoadingState, LoadedAllProduct] when CreateProductEvent is successful',
       build: () {
         when(
           createProductUsecase.call(tProduct),
-        ).thenAnswer((_) async =>  Right(tProduct));
+        ).thenAnswer((_) async => Right(tProduct));
         when(
           viewAllProductsUsecase.call(NoParams()),
         ).thenAnswer((_) async => Right(tProducts));
@@ -91,14 +100,12 @@ void main() {
           () => [LoadingState(), LoadingState(), LoadedAllProduct(tProducts)],
     );
 
-
-
-  blocTest<ProductBloc, ProductState>(
+    blocTest<ProductBloc, ProductState>(
       'emits [LoadingState, LoadedAllProduct] when UpdateProductEvent is successful',
       build: () {
         when(
           updateProductUsecase.call(tProduct),
-        ).thenAnswer((_) async => Right(tProduct as Product));
+        ).thenAnswer((_) async => Right(tProduct));
         when(
           viewAllProductsUsecase.call(NoParams()),
         ).thenAnswer((_) async => Right(tProducts));
@@ -109,6 +116,32 @@ void main() {
           () => [LoadingState(), LoadingState(), LoadedAllProduct(tProducts)],
     );
 
+    blocTest<ProductBloc, ProductState>(
+      'emits [LoadingState, LoadedAllProduct] when DeleteProductEvent is successful',
+      build: () {
+        when(
+          deleteProductUseCase.call(DeleteProductParams(productId: '1')),
+        ).thenAnswer((_) async => const Right(unit));
+        when(
+          viewAllProductsUsecase.call(NoParams()),
+        ).thenAnswer((_) async => Right(tProducts));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(DeleteProductEvent('1')),
+      expect:
+          () => [LoadingState(), LoadingState(), LoadedAllProduct(tProducts)],
+    );
 
-  }); 
+    blocTest<ProductBloc, ProductState>(
+      'emits [LoadingState, ErrorState] when LoadAllProductEvent fails',
+      build: () {
+        when(
+          viewAllProductsUsecase.call(NoParams()),
+        ).thenAnswer((_) async => Left(ServerFailure('error')));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(LoadAllProductEvent()),
+      expect: () => [LoadingState(), ErrorState('error')],
+    );
+  });
 }

@@ -8,7 +8,6 @@ import 'package:ecommerce_app/features/product/domain/usecases/view_all_products
 import 'package:ecommerce_app/features/product/domain/usecases/view_product_usecase.dart';
 import 'package:ecommerce_app/features/product/presentation/bloc/product_event.dart';
 import 'package:ecommerce_app/features/product/presentation/bloc/product_state.dart';
-import 'package:flutter/cupertino.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ViewAllProductsUsecase getAllProductsUseCase;
