@@ -8,7 +8,7 @@ import 'package:ecommerce_app/core/usecases/usecase.dart';
 
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:ecommerce_app/features/product/domain/repositories/product_repositories.dart';
-abstract class CreateProductUsecase implements UseCase<Product, Product> {
+class CreateProductUsecase implements UseCase<Product, Product> {
   final ProductRepository productRepository;
 
   CreateProductUsecase(this.productRepository);
@@ -16,11 +16,8 @@ abstract class CreateProductUsecase implements UseCase<Product, Product> {
   Future<Either<Failure, Product>> execute(Product product) {
     return productRepository.createProduct(product);
   }
-}
-class CreateProduct extends CreateProductUsecase {
-  CreateProduct(ProductRepository repository) : super(repository);
-
-  @override
+  
+   @override
   Future<Either<Failure, Product>> call(Product product) {
     return productRepository.createProduct(product);
   }

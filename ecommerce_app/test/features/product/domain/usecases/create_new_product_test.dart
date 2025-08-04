@@ -12,12 +12,12 @@ import '../../../../helpers/test_helpers.mocks.dart';
 
 @GenerateMocks([ProductRepository])
 void main() {
-  late CreateProduct usecase;
+  late CreateProductUsecase usecase;
   late MockProductRepository mockRepository;
 
   setUp(() {
     mockRepository = MockProductRepository();
-    usecase = CreateProduct(mockRepository as ProductRepository);
+    usecase = CreateProductUsecase(mockRepository as ProductRepository);
   });
 
   final testProduct = Product(

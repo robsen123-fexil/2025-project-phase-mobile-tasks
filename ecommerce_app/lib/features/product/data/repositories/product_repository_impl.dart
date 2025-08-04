@@ -53,18 +53,22 @@ class ProductRepositoryImpl implements ProductRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteProducts = await productRemoteDatasource.getAllProducts();
-
         await productLocalDatasource.cacheProducts(remoteProducts);
         return Right(remoteProducts);
-      } on ServerExceptions {
-        return const Left(ServerFailure('server error'));
+      } on ServerExceptions catch (e) {
+        print('Server error in getAllProducts: $e');
+        return Left(ServerFailure(e.toString()));
+      } catch (e) {
+        print('Unexpected error in getAllProducts: $e');
+        return const Left(ServerFailure('An unexpected error occurred'));
       }
     } else {
       try {
         final cachedProducts = await productLocalDatasource.getAllProducts();
         return Right(cachedProducts);
-      } on CacheExceptions {
-        return const Left(CacheFailure('No cached products available'));
+      } on CacheExceptions catch (e) {
+        print('Cache error in getAllProducts: $e');
+        return Left(CacheFailure(e.toString()));
       }
     }
   }

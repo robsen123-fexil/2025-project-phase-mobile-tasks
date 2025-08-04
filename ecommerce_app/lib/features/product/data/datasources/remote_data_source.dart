@@ -20,20 +20,34 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   final String url;
   ProductRemoteDataSourceImpl({
     required this.client,
-    this.url = 'https://g5-flutter-learning-path-be.onrender.com/',
+    this.url =
+        'https://g5-flutter-learning-path-be.onrender.com/api/v1/products',
   });
   @override
   Future<List<Product>> getAllProducts() async {
+    print('Making request to: $url');
     final response = await client.get(Uri.parse(url));
+    print('Response status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
     if (response.statusCode == 200) {
-      final Map<String, dynamic> responseData = json.decode(response.body);
-      if (responseData['data'] != null) {
-        final List<dynamic> productsData = responseData['data'];
-        return productsData.map((json) => ProductModel.fromJson(json)).toList();
+      try {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        if (responseData['data'] != null) {
+          final List<dynamic> productsData = responseData['data'];
+          return productsData
+              .map((json) => ProductModel.fromJson(json))
+              .toList();
+        }
+        throw ServerExceptions('No data field in response');
+      } catch (e) {
+        print('Error parsing response: $e');
+        throw ServerExceptions('Failed to parse response: $e');
       }
-      throw ServerExceptions();
     } else {
-      throw ServerExceptions();
+      throw ServerExceptions(
+        'Server responded with status code: ${response.statusCode}',
+      );
     }
   }
 
