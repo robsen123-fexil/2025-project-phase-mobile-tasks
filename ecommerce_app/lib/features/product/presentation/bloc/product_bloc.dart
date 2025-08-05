@@ -15,7 +15,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final DeleteProductUseCase deleteProductUsecase;
   final UpdateProductUsecase updateProductUsecase;
   final ViewProductUsecase viewProductUsecase;
-   String _mapFailureToMessage(Failure failure) {
+  String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
         return 'Server failure';
@@ -25,14 +25,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         return 'Unexpected error';
     }
   }
+
   ProductBloc({
     required this.getAllProductsUseCase,
     required this.createProductUsecase,
     required this.deleteProductUsecase,
-    required this.viewProductUsecase,
-    
-
     required this.updateProductUsecase,
+    required this.viewProductUsecase,
   }) : super(InitialState()) {
     // alll products
     on<LoadAllProductEvent>((event, emit) async {
@@ -43,7 +42,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         (products) => emit(LoadedAllProduct(products)),
       );
     });
- on<DeleteProductEvent>((event, emit) async {
+    on<CreateProductEvent>((event, emit) async {
+      emit(LoadingState());
+      final result = await createProductUsecase(event.product);
+      result.fold(
+        (failure) => emit(ErrorState(_mapFailureToMessage(failure))),
+        (_) {
+          // After successful creation, reload all products
+          add(LoadAllProductEvent());
+        },
+      );
+    });
+    on<DeleteProductEvent>((event, emit) async {
       emit(LoadingState());
       final result = await deleteProductUsecase(
         DeleteProductParams(productId: event.productid),
@@ -63,9 +73,20 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         (failure) => emit(ErrorState(_mapFailureToMessage(failure))),
         (product) => emit(LoadedSingleProductState(product)),
       );
-    }
-    
-    );
-   
+    });
+    on<GetSingleProductEvent>((event, emit) async {
+      emit(LoadingState());
+      final result = await viewProductUsecase(event.productId);
+      result.fold(
+        (failure) => emit(ErrorState(_mapFailureToMessage(failure))),
+        (product) {
+          if (product != null) {
+            emit(LoadedSingleProductState(product));
+          } else {
+            emit( ErrorState('Product not found'));
+          }
+        },
+      );
+    });
   }
 }

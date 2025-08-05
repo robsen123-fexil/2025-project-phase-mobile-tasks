@@ -17,7 +17,7 @@ void main() {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    dataSource = ProductLocalDatasourceImpl(mockSharedPreferences);
+    dataSource = ProductLocalDatasourceImpl(sharedPreferences: mockSharedPreferences);
 
     testProducts = [
       ProductModel(

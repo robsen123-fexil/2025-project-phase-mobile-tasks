@@ -20,7 +20,7 @@ abstract class ProductLocalDataSource {
 
 class ProductLocalDatasourceImpl implements ProductLocalDataSource {
   SharedPreferences sharedPreferences;
-  ProductLocalDatasourceImpl(this.sharedPreferences);
+  ProductLocalDatasourceImpl({required this.sharedPreferences});
 
   @override
   Future<void> cacheProducts(List<Product> products) =>
